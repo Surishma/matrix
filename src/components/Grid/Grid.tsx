@@ -6,29 +6,27 @@ type GridProps={
     rowCount:number;
     columnCount:number;
 };
-
-const GenerateCells:(columnCount: number)=>JSX.Element[]  =(columnCount)=>{
-    const cellsArray=[];
-    for(let i=0;i<columnCount;i++){
-    cellsArray.push(<Cell />);
-    }
-return cellsArray;
-
+const createArray:(count: number)=>number[]    =(count)=>{
+    const array=[];
+for(let i=0;i<count;i++){
+array.push(i);
+}
+return array;
 }
 
 const Grid:FunctionComponent<GridProps>=({rowCount,columnCount})=>{
-    const rowArray:JSX.Element[]=[];
-    for(let i=0;i<rowCount;i++){
-        rowArray.push(<div style={{display:'flex'}} >
-            
-        {GenerateCells(columnCount)
-        }
-        
-        </div>);
-    }
+   // const rowArray=createArray(rowCount);
+
+   // const columnArray=createArray(columnCount);
+    
     return(
         <>
-        {rowArray}
+        {createArray(rowCount).map(r=>
+            <div style={{display:'flex'}}>
+            {    createArray(columnCount).map(c=> <Cell />)}
+            </div>
+        )}
+       
         </>
     );
 }
